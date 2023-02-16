@@ -1,0 +1,8 @@
+uvicorn
+gunicorn
+fastapi
+flask
+xgboost
+lightgbm
+scikit-learn
+flask-cors
