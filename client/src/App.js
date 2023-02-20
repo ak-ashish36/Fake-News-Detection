@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import Alert from "./components/Alert";
 import Homepage from "./components/Homepage";
+import News from "./news/News";
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -26,6 +27,7 @@ function App() {
               path="/"
               element={<Homepage showAlert={showAlert} url={api} />}
             ></Route>
+            <Route exact path="/news" element={<News></News>}></Route>
           </Routes>
         </div>
       </Router>

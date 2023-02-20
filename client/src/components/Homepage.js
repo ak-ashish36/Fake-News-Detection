@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
 import Axios from "axios";
+import Spinner from "./Spinner";
 
 function Homepage(props) {
   const [newsText, setnewsText] = useState("");
   const [results, setresults] = useState({});
-  const [percentage, setPercentafe] = useState(0);
+  const [percentage, setPercentafe] = useState(null);
   const [loading, setLoading] = useState(0);
   const [status, setStatus] = useState(1);
 
@@ -108,13 +109,7 @@ function Homepage(props) {
         </form>
       </div>
       <br />
-      {loading ? (
-        <div className="d-flex justify-content-center">
-          <div className="spinner-border" role="status"></div>
-        </div>
-      ) : (
-        <></>
-      )}
+      {loading ? <Spinner/>:<></>}
       {status ? (
         <div style={{ textAlign: "center" }}>
           <strong>
@@ -125,6 +120,7 @@ function Homepage(props) {
               completed={percentage}
               customLabel={percentage + "% True"}
             />
+            <h5>{percentage}%</h5>
           </strong>
           {Object.keys(results).length !== 0 ? (
             <>
