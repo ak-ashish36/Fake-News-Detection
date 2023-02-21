@@ -6,7 +6,7 @@ import Spinner from "./Spinner";
 function Homepage(props) {
   const [newsText, setnewsText] = useState("");
   const [results, setresults] = useState({});
-  const [percentage, setPercentafe] = useState(null);
+  let percentage
   const [loading, setLoading] = useState(0);
   const [status, setStatus] = useState(1);
 
@@ -25,7 +25,7 @@ function Homepage(props) {
       total = total + 1;
     });
     let percent = (totalReal / total) * 100;
-    setPercentafe(Math.ceil(percent));
+    percentage=Math.ceil(percent);
     return result;
   }
 
@@ -109,7 +109,7 @@ function Homepage(props) {
         </form>
       </div>
       <br />
-      {loading ? <Spinner/>:<></>}
+      {loading ? <Spinner /> : <></>}
       {status ? (
         <div style={{ textAlign: "center" }}>
           <strong>
