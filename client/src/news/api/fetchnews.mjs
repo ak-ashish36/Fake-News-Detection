@@ -21,6 +21,7 @@ const fetchnews = async (category) => {
   let parsedData = await data.json();
   console.log(parsedData.articles.length);
   for (let i = 0; i < parsedData.articles.length; i++) {
+    if(parsedData.articles[i].description===null)continue;
     parsedData.articles[i]["subject"] = category;
     try {
       news.articles.push(parsedData.articles[i]);
@@ -65,7 +66,7 @@ const removeDuplicates = () => {
   } catch (err) {
     console.log(`Error Updating ${category[i]} News`, err);
   }
-  console.log(`Total ${news.articles.length} News Fetched`)
+  console.log(`Total ${results.length} News Fetched`)
 };
 await Fetch();
 removeDuplicates();

@@ -11,6 +11,7 @@
     "csv-parser": "^3.0.0",
     "fs": "^0.0.1-security",
     "json2csv": "^6.0.0-alpha.2",
+    "node-fetch": "^3.3.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-infinite-scroll-component": "^6.1.0",
@@ -23,7 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "fetch-live-news":"cd src/news/api && node fetchnews.mjs"
+    "fetch-live-news": "cd src/news/api && node fetchnews.mjs"
   },
   "eslintConfig": {
     "extends": [

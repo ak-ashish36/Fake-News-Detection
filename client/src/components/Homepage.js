@@ -6,7 +6,7 @@ import Spinner from "./Spinner";
 function Homepage(props) {
   const [newsText, setnewsText] = useState("");
   const [results, setresults] = useState({});
-  let percentage
+  const [percentage, setPercentage] = useState(null);
   const [loading, setLoading] = useState(0);
   const [status, setStatus] = useState(1);
 
@@ -25,7 +25,7 @@ function Homepage(props) {
       total = total + 1;
     });
     let percent = (totalReal / total) * 100;
-    percentage=Math.ceil(percent);
+    setPercentage(Math.ceil(percent));
     return result;
   }
 
@@ -77,7 +77,7 @@ function Homepage(props) {
     <div>
       <p style={{ textAlign: "center" }}>
         A fake news detection web application using Machine Learning algorithms,
-        developed using Python and React.js.{" "}
+        developed using Python and React.js.
       </p>
       <p style={{ textAlign: "center" }}>Enter your text to try it.</p>
       <br />
