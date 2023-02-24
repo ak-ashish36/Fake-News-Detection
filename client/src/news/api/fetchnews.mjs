@@ -19,9 +19,13 @@ const fetchnews = async (category) => {
     `https://newsapi.org/v2/top-headlines?country=in&category=${category}&apiKey=4505aaf4588f4ae094549d614e8701fd&pageSize=100`
   );
   let parsedData = await data.json();
-  console.log(parsedData.articles.length);
   for (let i = 0; i < parsedData.articles.length; i++) {
-    if(parsedData.articles[i].description===null)continue;
+    if (
+      parsedData.articles[i].description === null ||
+      parsedData.articles[i].description.length < 150
+    ) {
+      continue;
+    }
     parsedData.articles[i]["subject"] = category;
     try {
       news.articles.push(parsedData.articles[i]);
@@ -58,7 +62,7 @@ const removeDuplicates = () => {
     }
   });
   console.log("Duplicates Removed");
-  news.articles=results;
+  news.articles = results;
   try {
     news = JSON.stringify(news);
     fs.writeFileSync(`news.json`, news);
@@ -66,7 +70,7 @@ const removeDuplicates = () => {
   } catch (err) {
     console.log(`Error Updating ${category[i]} News`, err);
   }
-  console.log(`Total ${results.length} News Fetched`)
+  console.log(`Total ${results.length} News Fetched`);
 };
 await Fetch();
 removeDuplicates();

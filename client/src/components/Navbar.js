@@ -15,8 +15,6 @@ export default function Navbar() {
                     <div className="nav navbar-nav navbar-right" id="navbarNavAltMarkup">
                         <div className="navbar-nav">
                             <Link className="nav-link"
-                                to="/">API</Link>
-                            <Link className="nav-link"
                                 to="/news">LatestNews</Link>
                             <Link className="nav-link" target="_blank"
                                 to="https://github.com/ak-ashish36/Fake-News-Detection/blob/main/modelTraining.ipynb">NoteBook</Link>

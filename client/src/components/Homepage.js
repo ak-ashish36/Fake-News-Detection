@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ProgressBar from "@ramonak/react-progress-bar";
-import Axios from "axios";
 import Spinner from "./Spinner";
+import { MethodContext } from "../context/MethodState";
 
 function Homepage(props) {
+  const context = useContext(MethodContext);
+  const { predict, results, calculatePercentage } = context;
   const [newsText, setnewsText] = useState("");
-  const [results, setresults] = useState({});
   const [percentage, setPercentage] = useState(null);
   const [loading, setLoading] = useState(0);
   const [status, setStatus] = useState(1);
@@ -13,21 +14,6 @@ function Homepage(props) {
   const handleOnChange = (event) => {
     setnewsText(event.target.value);
   };
-
-  function calculatePercentage(result) {
-    let models = Object.keys(result);
-    let total = 0,
-      totalReal = 0;
-    models.forEach((i) => {
-      if (result[i] === "1") {
-        totalReal = totalReal + 1;
-      }
-      total = total + 1;
-    });
-    let percent = (totalReal / total) * 100;
-    setPercentage(Math.ceil(percent));
-    return result;
-  }
 
   function renameModel(old) {
     if (old === "LR") return "Logistic Regression";
@@ -56,23 +42,15 @@ function Homepage(props) {
       return;
     }
     setLoading(1);
-    try {
-      const response = await Axios.post(props.url, { text: newsText });
-      let res = await response.data;
-      if (res.status === "success") {
-        res = await calculatePercentage(res.result);
-        setresults(res);
-      } else {
-        setStatus(0);
-      }
-    } catch (err) {
-      console.log(err);
+    let res = await predict(newsText);
+    if (res.status === "success") {
+      setPercentage(await calculatePercentage(res.result));
+    } else {
       setStatus(0);
-    } finally {
-      setLoading(0);
     }
+    setLoading(0);
   };
-
+  useEffect(() => {}, [results, percentage]);
   return (
     <div>
       <p style={{ textAlign: "center" }}>
@@ -122,7 +100,7 @@ function Homepage(props) {
             />
             <h5>{percentage}%</h5>
           </strong>
-          {Object.keys(results).length !== 0 ? (
+          {percentage!==null ? (
             <>
               <span className="placeholder col-6">
                 The prediction percentage is based on Results of all the models
