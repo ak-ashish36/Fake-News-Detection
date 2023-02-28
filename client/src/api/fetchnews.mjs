@@ -20,12 +20,6 @@ const fetchnews = async (category) => {
   );
   let parsedData = await data.json();
   for (let i = 0; i < parsedData.articles.length; i++) {
-    if (
-      parsedData.articles[i].description === null ||
-      parsedData.articles[i].description.length < 150
-    ) {
-      continue;
-    }
     parsedData.articles[i]["subject"] = category;
     try {
       news.articles.push(parsedData.articles[i]);
@@ -48,6 +42,10 @@ const Fetch = async () => {
 };
 
 const removeDuplicates = () => {
+  if (news.articles.length < 25) {
+    console.log("News not updated , because less or no data fetched");
+    return;
+  }
   const results = [];
   const set = new Set();
   console.log("Removing Duplicates");

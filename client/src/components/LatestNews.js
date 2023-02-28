@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import NewsItem from "./NewsItem";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Spinner from "../components/Spinner";
-import news from "./api/news.json";
+import Spinner from "./Spinner";
+import news from "../api/news.json";
 
 const News = () => {
   const [articles, setArticles] = useState([]);

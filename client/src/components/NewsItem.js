@@ -67,7 +67,7 @@ const NewsItem = (props) => {
           </a>
           {/* Prediction */}
           <div
-            style={{ display: "inline", position: "relative", right: "-13rem" }}
+            style={{ display: "inline", position: "absolute", right: "-15.5rem" }}
             className="card-text container"
           >
             {!loading ? (
@@ -77,7 +77,7 @@ const NewsItem = (props) => {
                     {percent == null ? (
                       <button
                         className="btn btn-sm btn-primary"
-                        onClick={() => prediction(description)}
+                        onClick={() => prediction(title+description)}
                       >
                         Predict
                       </button>
@@ -85,7 +85,7 @@ const NewsItem = (props) => {
                       <div
                         style={{
                           display: "table-row",
-                          position: "relative",
+                          position: "absolute",
                           textAlign: "center",
                         }}
                       >
@@ -102,7 +102,7 @@ const NewsItem = (props) => {
                         </div>
                         <div
                           className="retry"
-                          onClick={() => prediction(description)}
+                          onClick={() => prediction(title+description)}
                         >
                           <i
                             className="fa fa-refresh fa-sm"

@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import Alert from "./components/Alert";
 import Homepage from "./components/Homepage";
-import News from "./news/News";
+import LatestNews from "./components/LatestNews";
+import NewsDetection from "./components/NewsDetection";
 import { MethodState } from "./context/MethodState";
 function App() {
   const [alert, setAlert] = useState(null);
@@ -14,7 +15,7 @@ function App() {
       setAlert(null);
     }, 2000);
   };
-  let api = "http://localhost:5000/predict";
+
   return (
     <>
       <MethodState>
@@ -23,12 +24,13 @@ function App() {
           <Alert alert={alert} />
           <div className="container my-5 py-3">
             <Routes className>
+              <Route exact path="/" element={<Homepage />}></Route>
               <Route
                 exact
-                path="/"
-                element={<Homepage showAlert={showAlert} url={api} />}
+                path="/detectNews"
+                element={<NewsDetection showAlert={showAlert}></NewsDetection>}
               ></Route>
-              <Route exact path="/news" element={<News></News>}></Route>
+              <Route exact path="/news" element={<LatestNews></LatestNews>}></Route>
             </Routes>
           </div>
         </Router>
