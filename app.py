@@ -3,6 +3,9 @@ from flask_cors import CORS
 import joblib
 import re
 import string
+import nltk
+from nltk.stem import WordNetLemmatizer
+lemmatizer = WordNetLemmatizer()
 
 app = Flask(__name__)
 CORS(app)
@@ -38,6 +41,18 @@ def wordopt(text):
     text = re.sub('\w*\d\w*', '', text)    
     return text
 
+# Download necessary resources for tokenization and lemmatization
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+# Define a function to lemmatize a list of words
+def lemmatize_text(text):
+    words = nltk.word_tokenize(text)
+    # lemmatized_words = [lemmatizer.lemmatize(word) for word in words]
+    lemmatized_words = [lemmatizer.lemmatize(word) for word in words if word not in set(stopwords.words('english'))]
+    return ' '.join(lemmatized_words)
+
 def predict(text):
     for i in range (len(models)):
         key =list(result.keys())[i]
@@ -53,16 +68,17 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def index():
-    # article_text = request.get_json()
     article_text = request.json.get('text')
     if(len(models) and vectorizer):
+        #Prepare the article text
         article_text = wordopt(article_text)
+        article_text=lemmatize_text(article_text)
         # Convert the article text into numerical features
         article_feature = vectorizer.transform([article_text])
         # Make a prediction on the article
         prediction = predict(article_feature)
         # Return the prediction result as a JSON response
-        return {"status":"success","result":prediction}
+        return {"status":"success","result":prediction,"text":article_text}
     else:
         return {"status":"fail"}
 
