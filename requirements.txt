@@ -1,9 +1,7 @@
-uvicorn
-gunicorn
-fastapi
-flask
+pandas
+scikit-learn
 xgboost
 lightgbm
-scikit-learn
+flask
 flask-cors
-pandas
+gunicorn
