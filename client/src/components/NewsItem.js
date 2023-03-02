@@ -11,10 +11,11 @@ const NewsItem = (props) => {
   const [results, setresults] = useState({});
   const [percent, setPercent] = useState(null);
 
-  const prediction = async (text) => {
+  const detection = async (text) => {
     setStatus(1);
     setLoading(1);
-    let res = await predict(text);
+    let url = props.api+"/detect"
+    let res = await predict(url,text);
     if (res.status === "success") {
       setresults(res.result);
       setPercent(await calculatePercentage(res.result));
@@ -77,7 +78,7 @@ const NewsItem = (props) => {
                     {percent == null ? (
                       <button
                         className="btn btn-sm btn-primary"
-                        onClick={() => prediction(title+description)}
+                        onClick={() => detection(title+description)}
                       >
                         Predict
                       </button>
@@ -102,7 +103,7 @@ const NewsItem = (props) => {
                         </div>
                         <div
                           className="retry"
-                          onClick={() => prediction(title+description)}
+                          onClick={() => detection(title+description)}
                         >
                           <i
                             className="fa fa-refresh fa-sm"
@@ -124,7 +125,7 @@ const NewsItem = (props) => {
                     <div className="btn-sm btn-danger">Server Error!</div>
                     <div
                       className="retry"
-                      onClick={() => prediction(description)}
+                      onClick={() => detection(description)}
                     >
                       <i className="fa fa-refresh fa-sm" aria-hidden="true"></i>
                     </div>

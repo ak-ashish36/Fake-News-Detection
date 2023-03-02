@@ -42,7 +42,8 @@ function NewsDetection(props) {
       return;
     }
     setLoading(1);
-    let res = await predict(newsText);
+    let url = props.api+"/detect"
+    let res = await predict(url,newsText);
     if (res.status === "success") {
       setPercentage(await calculatePercentage(res.result));
     } else {

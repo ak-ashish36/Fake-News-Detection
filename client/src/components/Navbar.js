@@ -9,11 +9,11 @@ export default function Navbar() {
         className="navbar fixed-top navbar-expand-lg navbar-light"
       >
         <div className="container-fluid">
-          <Link class="navbar-brand" to="/">
+          <Link className="navbar-brand" to="/">
             Fake-News-Detection
           </Link>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -21,7 +21,7 @@ export default function Navbar() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">

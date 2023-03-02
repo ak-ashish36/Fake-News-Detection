@@ -15,10 +15,10 @@ function App() {
       setAlert(null);
     }, 2000);
   };
-
+  const api = process.env.REACT_APP_API || "http://localhost:5000/";
   return (
     <>
-      <MethodState>
+      <MethodState api={api}>
         <Router>
           <Navbar />
           <Alert alert={alert} />
@@ -28,9 +28,9 @@ function App() {
               <Route
                 exact
                 path="/detectNews"
-                element={<NewsDetection showAlert={showAlert}></NewsDetection>}
+                element={<NewsDetection showAlert={showAlert} api={api}></NewsDetection>}
               ></Route>
-              <Route exact path="/news" element={<LatestNews></LatestNews>}></Route>
+              <Route exact path="/news" element={<LatestNews api={api}></LatestNews>}></Route>
             </Routes>
           </div>
         </Router>

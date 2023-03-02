@@ -5,7 +5,6 @@ const MethodContext = createContext();
 
 
 const MethodState = (props) => {
-    const url = "http://localhost:5000/predict";
     const [results, setresults] = useState({});
     function calculatePercentage(result) {
         let models = Object.keys(result);
@@ -21,7 +20,7 @@ const MethodState = (props) => {
         return Math.ceil(percent);
     }
 
-    const predict = async (newsText) => {
+    const predict = async (url,newsText) => {
         try {
             const response = await Axios.post(url, { text: newsText });
             let res = await response.data;

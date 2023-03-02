@@ -66,7 +66,7 @@ def predict(text):
 def home():
     return "Backend Running....."
 
-@app.route('/predict', methods=['POST'])
+@app.route('/detect', methods=['POST'])
 def index():
     article_text = request.json.get('text')
     if(len(models) and vectorizer):
