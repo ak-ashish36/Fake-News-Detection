@@ -1,6 +1,5 @@
 node_modules
 datasets/
-*.pkl
 .env
 build
 
