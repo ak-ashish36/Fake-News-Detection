@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request
 from flask_cors import CORS
 import joblib
 import re
@@ -11,6 +11,9 @@ app = Flask(__name__)
 CORS(app)
 cors = CORS(app, resources={r"*": {"origins": "*"}})
 
+@app.route('/', methods=['GET'])
+def home():
+    return "Backend Running....."
 
 directory=["models/LR.pkl","models/PAC.pkl","models/KNN.pkl","models/NBC.pkl","models/DTC.pkl","models/RFC.pkl","models/GBC.pkl","models/XGB.pkl","models/LGB.pkl","models/SVM.pkl","models/MLP.pkl"]
 models=[]
@@ -62,9 +65,6 @@ def predict(text):
             print("Failed to predict with model"+models[i])
     return result
 
-@app.route('/', methods=['GET'])
-def home():
-    return "Backend Running....."
 
 @app.route('/detect', methods=['POST'])
 def index():

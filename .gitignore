@@ -1,5 +1,5 @@
 node_modules
-*.csv
+datasets/
 *.pkl
 .env
 build
