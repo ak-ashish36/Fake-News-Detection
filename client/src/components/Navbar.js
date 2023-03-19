@@ -15,9 +15,9 @@ export default function Navbar() {
           <button
             className="navbar-toggler"
             type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
@@ -26,16 +26,21 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item active">
-                <Link className="nav-link" to="detectNews">
-                  Detect<span className="sr-only">(current)</span>
+                <Link className="nav-link" to="/latestNews">
+                  LatestNews<span className="sr-only">(current)</span>
+                </Link>
+              </li>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/datasetNews">
+                  DatasetNews<span className="sr-only">(current)</span>
                 </Link>
               </li>
             </ul>
           </div>
           <div className="nav navbar-nav navbar-right" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <Link className="nav-link" to="/news">
-                LatestNews
+              <Link className="nav-link" target="_blank" to="/detectNews">
+                Detect
               </Link>
               <Link
                 className="nav-link"
@@ -49,7 +54,7 @@ export default function Navbar() {
                 target="_blank"
                 to="https://github.com/ak-ashish36/Fake-News-Detection"
               >
-                Code Source
+                Source Code
               </Link>
             </div>
           </div>

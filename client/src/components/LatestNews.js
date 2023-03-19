@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import NewsItem from "./NewsItem";
+import NewsItem from "./LatestNewsItem";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Spinner from "./Spinner";
 import news from "../api/news.json";
 
-const News = (props) => {
+const LatestNews = (props) => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [totalResults, setTotalResults] = useState(0);
 
   const FetchNewsLocal = () => {
+    news.articles.sort(function (a, b) {
+      return Math.random() - 0.5;
+    });
     setLoading(true);
     setTotalResults(news.articles.length);
     setArticles(news.articles.slice(0, page * 6));
@@ -56,6 +59,7 @@ const News = (props) => {
                   date={element.publishedAt}
                   source={element.source.name}
                   api={props.api}
+                  showAlert={props.showAlert}
                 />
               </div>
             );
@@ -66,4 +70,4 @@ const News = (props) => {
   );
 };
 
-export default News;
+export default LatestNews;

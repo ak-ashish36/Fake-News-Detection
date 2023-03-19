@@ -5,15 +5,16 @@ import Navbar from "./components/Navbar";
 import Alert from "./components/Alert";
 import Homepage from "./components/Homepage";
 import LatestNews from "./components/LatestNews";
+import DatasetNews from "./components/DatasetNews";
 import NewsDetection from "./components/NewsDetection";
 import { MethodState } from "./context/MethodState";
 function App() {
   const [alert, setAlert] = useState(null);
-  const showAlert = (message) => {
-    setAlert({ msg: message });
+  const showAlert = (msg,text,label,time=2000) => {
+    setAlert({ msg:msg,text:text,label:label});
     setTimeout(() => {
       setAlert(null);
-    }, 2000);
+    }, time);
   };
   const api = process.env.REACT_APP_API || "http://localhost:5000/";
   return (
@@ -30,7 +31,8 @@ function App() {
                 path="/detectNews"
                 element={<NewsDetection showAlert={showAlert} api={api}></NewsDetection>}
               ></Route>
-              <Route exact path="/news" element={<LatestNews api={api}></LatestNews>}></Route>
+              <Route exact path="/latestNews" element={<LatestNews showAlert={showAlert} api={api}></LatestNews>}></Route>
+              <Route exact path="/datasetNews" element={<DatasetNews showAlert={showAlert} api={api}></DatasetNews>}></Route>
             </Routes>
           </div>
         </Router>
